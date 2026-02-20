@@ -1,0 +1,1075 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Franco Barreto | Hardware Engineer</title>
+    <meta name="description" content="FPGA & Embedded Systems Engineer Portfolio — Designing high-performance digital systems from RTL to silicon.">
+    
+    <!-- ============================================ -->
+    <!-- TAILWIND CSS CDN -->
+    <!-- ============================================ -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- ============================================ -->
+    <!-- GSAP 3 CDN (Core Library) -->
+    <!-- ============================================ -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    
+    <!-- ============================================ -->
+    <!-- INTER FONT (Apple's UI Font of Choice) -->
+    <!-- ============================================ -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- ============================================ -->
+    <!-- TAILWIND CONFIGURATION -->
+    <!-- Extends default theme with Apple-inspired colors
+    <!-- ============================================ -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+                    },
+                    colors: {
+                        /* ============================== */
+                        /* LIGHT THEME (Hero, Footer)     */
+                        /* ============================== */
+                        'apple-white': '#FFFFFF',
+                        'apple-charcoal': '#1D1D1F',
+                        'apple-gray': '#86868B',
+                        'apple-light-gray': '#E5E5EA',
+                        'apple-bg': '#F5F5F7',
+                        
+                        /* ============================== */
+                        /* DARK THEME (Project Showcase)  */
+                        /* ============================== */
+                        'dark-bg': '#161617',
+                        'dark-card': '#1D1D1F',
+                        'dark-pill': '#2C2C2E',
+                        'dark-pill-hover': '#3A3A3C',
+                        'dark-pill-active': '#48484A',
+                        'dark-text': '#F5F5F7',
+                        'dark-text-muted': '#A1A1A6',
+                        'dark-border': '#38383A',
+                    },
+                }
+            }
+        }
+    </script>
+    
+    <!-- ============================================ -->
+    <!-- EMBEDDED STYLES -->
+    <!-- Critical CSS that cannot be achieved with Tailwind utilities alone -->
+    <!-- ============================================ -->
+    <style>
+        /* ============================== */
+        /* GLOBAL TYPOGRAPHY SMOOTHING    */
+        /* ============================== */
+        * {
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: #FFFFFF;
+            color: #1D1D1F;
+            overflow-x: hidden;
+        }
+        
+        /* ============================== */
+        /* NAVIGATION GLASSMORPHISM       */
+        /* ============================== */
+        .nav-blur {
+            backdrop-filter: saturate(180%) blur(20px);
+            -webkit-backdrop-filter: saturate(180%) blur(20px);
+            background-color: rgba(255, 255, 255, 0.72);
+        }
+        
+        /* ============================== */
+        /* PILL BUTTON PLUS/X ICON        */
+        /* CSS-only icon with rotation    */
+        /* ============================== */
+        .pill-icon {
+            width: 18px;
+            height: 18px;
+            position: relative;
+            flex-shrink: 0;
+        }
+        
+        .pill-icon::before,
+        .pill-icon::after {
+            content: '';
+            position: absolute;
+            background-color: #F5F5F7;
+            border-radius: 1px;
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        /* Horizontal bar */
+        .pill-icon::before {
+            width: 12px;
+            height: 2px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        
+        /* Vertical bar */
+        .pill-icon::after {
+            width: 2px;
+            height: 12px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        
+        /* ============================== */
+        /* INFO CARD GLASSMORPHISM        */
+        /* ============================== */
+        .info-card {
+            background: rgba(44, 44, 46, 0.85);
+            backdrop-filter: saturate(180%) blur(20px);
+            -webkit-backdrop-filter: saturate(180%) blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        
+        /* ============================== */
+        /* VISUAL STAGE IMAGE CONTAINER   */
+        /* ============================== */
+        .visual-stage {
+            background: linear-gradient(145deg, #0D0D0E 0%, #1A1A1B 100%);
+        }
+        
+        .visual-stage img {
+            will-change: transform, opacity;
+        }
+        
+        /* ============================== */
+        /* TECH STACK TAG STYLING         */
+        /* ============================== */
+        .tech-tag {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            transition: all 0.2s ease;
+        }
+        
+        .tech-tag:hover {
+            background: rgba(255, 255, 255, 0.14);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+        
+        /* ============================== */
+        /* CASE STUDY LINK STYLING        */
+        /* ============================== */
+        .case-study-link {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .case-study-link:hover {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.18) 0%, rgba(255, 255, 255, 0.1) 100%);
+            border-color: rgba(255, 255, 255, 0.25);
+            transform: translateX(4px);
+        }
+        
+        /* ============================== */
+        /* SCROLL REVEAL ANIMATION        */
+        /* ============================== */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1),
+                        transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .reveal-delay-1 { transition-delay: 0.1s; }
+        .reveal-delay-2 { transition-delay: 0.2s; }
+        .reveal-delay-3 { transition-delay: 0.3s; }
+        .reveal-delay-4 { transition-delay: 0.4s; }
+        
+        /* ============================== */
+        /* CONTACT LINK HOVER EFFECT      */
+        /* ============================== */
+        .contact-link {
+            position: relative;
+            transition: color 0.3s ease;
+        }
+        
+        .contact-link::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background-color: currentColor;
+            transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .contact-link:hover::after {
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body class="bg-apple-white">
+
+    <!-- ============================================ -->
+    <!-- SECTION 1: THE CLEAN HERO                   -->
+    <!-- Minimalist, full-viewport introduction      -->
+    <!-- ============================================ -->
+    <section id="hero" class="min-h-screen flex flex-col items-center justify-center px-6 py-20 relative">
+        
+        <!-- Background Gradient Orb (Subtle) -->
+        <div class="absolute inset-0 overflow-hidden pointer-events-none">
+            <div class="absolute top-1/4 left-1/2 -translate-x-1/2 w-[800px] h-[800px] bg-gradient-to-r from-apple-light-gray/30 to-transparent rounded-full blur-3xl opacity-50"></div>
+        </div>
+        
+        <!-- Hero Content -->
+        <div class="text-center max-w-4xl mx-auto relative z-10">
+            
+            <!-- Eyebrow Label -->
+            <div class="reveal mb-6">
+                <span class="inline-flex items-center px-4 py-1.5 rounded-full text-xs font-medium tracking-wide uppercase bg-apple-charcoal/5 text-apple-gray border border-apple-light-gray">
+                    <span class="w-1.5 h-1.5 bg-emerald-500 rounded-full mr-2 animate-pulse"></span>
+                    Open to Opportunities
+                </span>
+            </div>
+            
+            <!-- Main Headline -->
+            <h1 class="reveal reveal-delay-1 text-5xl md:text-7xl lg:text-8xl font-bold text-apple-charcoal tracking-tight leading-[0.95] mb-8">
+                Hardware,<br>
+                <span class="text-apple-gray">Architected.</span>
+            </h1>
+            
+            <!-- Subtitle -->
+            <p class="reveal reveal-delay-2 text-lg md:text-xl text-apple-gray font-light max-w-xl mx-auto mb-3">
+                FPGA & Embedded Systems Engineer
+            </p>
+            
+            <!-- Description -->
+            <p class="reveal reveal-delay-3 text-base md:text-lg text-apple-gray/80 max-w-2xl mx-auto leading-relaxed mb-14">
+                Designing high-performance digital systems, from RTL to silicon.<br class="hidden md:block">
+                Specializing in hardware acceleration, real-time systems, and embedded architecture.
+            </p>
+            
+            <!-- CTA Button -->
+            <div class="reveal reveal-delay-4">
+                <a href="#projects" class="group inline-flex items-center px-8 py-4 bg-apple-charcoal text-white rounded-full font-medium text-base hover:bg-apple-charcoal/90 transition-all duration-300 shadow-lg shadow-apple-charcoal/20 hover:shadow-xl hover:shadow-apple-charcoal/25 hover:-translate-y-0.5">
+                    Explore my work
+                    <svg class="w-5 h-5 ml-2 transform group-hover:translate-y-0.5 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
+        
+        <!-- Scroll Indicator -->
+        <div class="absolute bottom-10 left-1/2 -translate-x-1/2 reveal reveal-delay-4">
+            <div class="w-6 h-10 border-2 border-apple-gray/30 rounded-full flex justify-center">
+                <div class="w-1 h-2 bg-apple-gray/50 rounded-full mt-2 animate-bounce"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- SECTION 2: INTERACTIVE PROJECT SHOWCASE     -->
+    <!-- Apple "Take a Closer Look" style module     -->
+    <!-- ============================================ -->
+    <section id="projects" class="py-16 md:py-24 px-4 md:px-8">
+        
+        <!-- Dark Container with Rounded Corners -->
+        <div class="bg-dark-bg rounded-[2rem] md:rounded-[2.5rem] p-6 md:p-10 lg:p-12 max-w-[1440px] mx-auto">
+            
+            <!-- Section Header -->
+            <div class="mb-10 md:mb-14">
+                <h2 class="text-3xl md:text-4xl lg:text-5xl font-semibold text-dark-text tracking-tight">
+                    Take a closer look.
+                </h2>
+                <p class="text-dark-text-muted text-base md:text-lg mt-3 max-w-xl">
+                    Deep dives into production hardware systems—from concept to silicon.
+                </p>
+            </div>
+            
+            <!-- ============================================ -->
+            <!-- TWO-COLUMN GRID: 35% Controls / 65% Visual   -->
+            <!-- ============================================ -->
+            <div class="grid grid-cols-1 lg:grid-cols-[35%_65%] gap-6 lg:gap-10">
+                
+                <!-- ============================== -->
+                <!-- LEFT COLUMN: Project Controls  -->
+                <!-- ============================== -->
+                <div class="flex flex-col gap-3" id="project-controls">
+                    
+                    <!-- ============================== -->
+                    <!-- PROJECT 1: PYNQ-Z2 CNN        -->
+                    <!-- ============================== -->
+                    <div class="project-item" data-project="pynq-cnn">
+                        
+                        <!-- Pill Button -->
+                        <button class="pill-button w-full flex items-center justify-between px-5 py-4 bg-dark-pill hover:bg-dark-pill-hover rounded-full text-dark-text font-medium text-sm md:text-base transition-colors duration-200 cursor-pointer border-0 outline-none focus:ring-2 focus:ring-white/20" data-project="pynq-cnn">
+                            <span class="truncate pr-3">PYNQ-Z2 CNN Accelerator</span>
+                            <span class="pill-icon"></span>
+                        </button>
+                        
+                        <!-- Expandable Info Card -->
+                        <div class="info-card rounded-2xl mt-3 overflow-hidden" style="height: 0; opacity: 0; padding: 0;">
+                            <div class="info-card-content p-5" style="opacity: 0; transform: translateY(10px);">
+                                
+                                <!-- Technical Summary -->
+                                <p class="text-dark-text-muted text-sm leading-relaxed mb-4">
+                                    Custom CNN inference accelerator achieving <span class="text-dark-text font-medium">10× speedup</span> over ARM Cortex-A9 baseline. Implements a systolic array MAC engine with <span class="text-dark-text font-medium">INT8 quantization</span> and AXI4-Stream DMA for zero-copy data transfer.
+                                </p>
+                                
+                                <!-- Tech Stack Tags -->
+                                <div class="flex flex-wrap gap-2 mb-5">
+                                    <span class="tech-tag px-3 py-1 rounded-full text-xs text-dark-text/90">Verilog</span>
+                                    <span class="tech-tag px-3 py-1 rounded-full text-xs text-dark-text/90">Vivado HLS</span>
+                                    <span class="tech-tag px-3 py-1 rounded-full text-xs text-dark-text/90">AXI4</span>
+                                    <span class="tech-tag px-3 py-1 rounded-full text-xs text-dark-text/90">Python</span>
+                                    <span class="tech-tag px-3 py-1 rounded-full text-xs text-dark-text/90">Zynq-7000</span>
+                                </div>
+                                
+                                <!-- Case Study Link -->
+                                <a href="case-study.html?project=pynq-cnn" class="case-study-link inline-flex items-center px-4 py-2.5 rounded-xl text-sm font-medium text-dark-text group">
+                                    Read Full Case Study
+                                    <svg class="w-4 h-4 ml-2 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- ============================== -->
+                    <!-- PROJECT 2: Real-Time Scope    -->
+                    <!-- ============================== -->
+                    <div class="project-item" data-project="oscilloscope">
+                        
+                        <!-- Pill Button -->
+                        <button class="pill-button w-full flex items-center justify-between px-5 py-4 bg-dark-pill hover:bg-dark-pill-hover rounded-full text-dark-text font-medium text-sm md:text-base transition-colors duration-200 cursor-pointer border-0 outline-none focus:ring-2 focus:ring-white/20" data-project="oscilloscope">
+                            <span class="truncate pr-3">uOttaHack Real-Time Oscilloscope</span>
+                            <span class="pill-icon"></span>
+                        </button>
+                        
+                        <!-- Expandable Info Card -->
+                        <div class="info-card rounded-2xl mt-3 overflow-hidden" style="height: 0; opacity: 0; padding: 0;">
+                            <div class="info-card-content p-5" style="opacity: 0; transform: translateY(10px);">
+                                
+                                <!-- Technical Summary -->
+                                <p class="text-dark-text-muted text-sm leading-relaxed mb-4">
+                                    48-hour hackathon project: <span class="text-dark-text font-medium">50 MSPS digital oscilloscope</span> with real-time FFT display. Built on QNX Neutrino RTOS with deterministic <span class="text-dark-text font-medium">sub-10µs interrupt latency</span> and custom DMA ring-buffer architecture.
+                                </p>
+                                
+                                <!-- Tech Stack Tags -->
+                                <div class="flex flex-wrap gap-2 mb-5">
+                                    <span class="tech-tag px-3 py-1 rounded-full text-xs text-dark-text/90">C</span>
+                                    <span class="tech-tag px-3 py-1 rounded-full text-xs text-dark-text/90">QNX RTOS</span>
+                                    <span class="tech-tag px-3 py-1 rounded-full text-xs text-dark-text/90">ARM Cortex-M7</span>
+                                    <span class="tech-tag px-3 py-1 rounded-full text-xs text-dark-text/90">SPI DMA</span>
+                                    <span class="tech-tag px-3 py-1 rounded-full text-xs text-dark-text/90">FFT</span>
+                                </div>
+                                
+                                <!-- Case Study Link -->
+                                <a href="case-study.html?project=oscilloscope" class="case-study-link inline-flex items-center px-4 py-2.5 rounded-xl text-sm font-medium text-dark-text group">
+                                    Read Full Case Study
+                                    <svg class="w-4 h-4 ml-2 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- ============================== -->
+                    <!-- PROJECT 3: PCIe DMA Controller -->
+                    <!-- ============================== -->
+                    <div class="project-item" data-project="pcie-dma">
+                        
+                        <!-- Pill Button -->
+                        <button class="pill-button w-full flex items-center justify-between px-5 py-4 bg-dark-pill hover:bg-dark-pill-hover rounded-full text-dark-text font-medium text-sm md:text-base transition-colors duration-200 cursor-pointer border-0 outline-none focus:ring-2 focus:ring-white/20" data-project="pcie-dma">
+                            <span class="truncate pr-3">PCIe Gen3 DMA Controller</span>
+                            <span class="pill-icon"></span>
+                        </button>
+                        
+                        <!-- Expandable Info Card -->
+                        <div class="info-card rounded-2xl mt-3 overflow-hidden" style="height: 0; opacity: 0; padding: 0;">
+                            <div class="info-card-content p-5" style="opacity: 0; transform: translateY(10px);">
+                                
+                                <!-- Technical Summary -->
+                                <p class="text-dark-text-muted text-sm leading-relaxed mb-4">
+                                    High-bandwidth DMA engine achieving <span class="text-dark-text font-medium">6.8 GB/s sustained throughput</span> on PCIe 3.0 x8. Features scatter-gather descriptor chains, MSI-X interrupt coalescing, and <span class="text-dark-text font-medium">credit-based flow control</span> for zero packet loss.
+                                </p>
+                                
+                                <!-- Tech Stack Tags -->
+                                <div class="flex flex-wrap gap-2 mb-5">
+                                    <span class="tech-tag px-3 py-1 rounded-full text-xs text-dark-text/90">SystemVerilog</span>
+                                    <span class="tech-tag px-3 py-1 rounded-full text-xs text-dark-text/90">UVM</span>
+                                    <span class="tech-tag px-3 py-1 rounded-full text-xs text-dark-text/90">PCIe 3.0</span>
+                                    <span class="tech-tag px-3 py-1 rounded-full text-xs text-dark-text/90">Synopsys DC</span>
+                                </div>
+                                
+                                <!-- Case Study Link -->
+                                <a href="case-study.html?project=pcie-dma" class="case-study-link inline-flex items-center px-4 py-2.5 rounded-xl text-sm font-medium text-dark-text group">
+                                    Read Full Case Study
+                                    <svg class="w-4 h-4 ml-2 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- ============================== -->
+                    <!-- PROJECT 4: RISC-V Core        -->
+                    <!-- ============================== -->
+                    <div class="project-item" data-project="riscv-core">
+                        
+                        <!-- Pill Button -->
+                        <button class="pill-button w-full flex items-center justify-between px-5 py-4 bg-dark-pill hover:bg-dark-pill-hover rounded-full text-dark-text font-medium text-sm md:text-base transition-colors duration-200 cursor-pointer border-0 outline-none focus:ring-2 focus:ring-white/20" data-project="riscv-core">
+                            <span class="truncate pr-3">RISC-V RV32IM Processor</span>
+                            <span class="pill-icon"></span>
+                        </button>
+                        
+                        <!-- Expandable Info Card -->
+                        <div class="info-card rounded-2xl mt-3 overflow-hidden" style="height: 0; opacity: 0; padding: 0;">
+                            <div class="info-card-content p-5" style="opacity: 0; transform: translateY(10px);">
+                                
+                                <!-- Technical Summary -->
+                                <p class="text-dark-text-muted text-sm leading-relaxed mb-4">
+                                    5-stage pipelined RISC-V core with <span class="text-dark-text font-medium">1.2 DMIPS/MHz</span> and full M-extension support. Includes 2-bit saturating branch predictor, 4KB I-cache, and synthesizes to <span class="text-dark-text font-medium">220 MHz on 28nm TSMC</span> at 0.85V nominal.
+                                </p>
+                                
+                                <!-- Tech Stack Tags -->
+                                <div class="flex flex-wrap gap-2 mb-5">
+                                    <span class="tech-tag px-3 py-1 rounded-full text-xs text-dark-text/90">Verilog</span>
+                                    <span class="tech-tag px-3 py-1 rounded-full text-xs text-dark-text/90">RISC-V ISA</span>
+                                    <span class="tech-tag px-3 py-1 rounded-full text-xs text-dark-text/90">Synopsys VCS</span>
+                                    <span class="tech-tag px-3 py-1 rounded-full text-xs text-dark-text/90">28nm TSMC</span>
+                                </div>
+                                
+                                <!-- Case Study Link -->
+                                <a href="case-study.html?project=riscv-core" class="case-study-link inline-flex items-center px-4 py-2.5 rounded-xl text-sm font-medium text-dark-text group">
+                                    Read Full Case Study
+                                    <svg class="w-4 h-4 ml-2 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+                <!-- END LEFT COLUMN -->
+                
+                <!-- ============================== -->
+                <!-- RIGHT COLUMN: Visual Stage     -->
+                <!-- ============================== -->
+                <div class="visual-stage relative w-full min-h-[400px] md:min-h-[500px] lg:min-h-[550px] rounded-2xl overflow-hidden" id="visual-stage">
+                    
+                    <!-- Project Images (Stacked Absolutely) -->
+                    
+                    <!-- Image 1: PYNQ CNN - Full FPGA Board View -->
+                    <img 
+                        src="fpga-board.png" 
+                        alt="PYNQ-Z2 FPGA Board with CNN Accelerator" 
+                        class="project-image absolute inset-0 w-full h-full object-contain p-6 md:p-10"
+                        data-project="pynq-cnn"
+                        style="opacity: 1; transform: scale(1);"
+                    >
+                    
+                    <!-- Image 2: Oscilloscope - Close-up of Processing Core -->
+                    <img 
+                        src="chip-layer.png" 
+                        alt="Real-Time Signal Processing Core" 
+                        class="project-image absolute inset-0 w-full h-full object-contain p-6 md:p-10"
+                        data-project="oscilloscope"
+                        style="opacity: 0; transform: scale(1.05);"
+                    >
+                    
+                    <!-- Image 3: PCIe DMA - Ethernet for High-Speed Data Transfer -->
+                    <img 
+                        src="eth-layer.png" 
+                        alt="High-Speed Ethernet Data Interface" 
+                        class="project-image absolute inset-0 w-full h-full object-contain p-6 md:p-10"
+                        data-project="pcie-dma"
+                        style="opacity: 0; transform: scale(1.05);"
+                    >
+                    
+                    <!-- Image 4: RISC-V Core - Processor Die Shot -->
+                    <img 
+                        src="chip-die.png" 
+                        alt="RISC-V RV32IM Processor Die Shot" 
+                        class="project-image absolute inset-0 w-full h-full object-contain p-6 md:p-10"
+                        data-project="riscv-core"
+                        style="opacity: 0; transform: scale(1.05);"
+                    >
+                    
+                    <!-- Subtle Grid Overlay -->
+                    <div class="absolute inset-0 pointer-events-none opacity-[0.03]" style="background-image: linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px); background-size: 40px 40px;"></div>
+                    
+                </div>
+                <!-- END RIGHT COLUMN -->
+                
+            </div>
+            <!-- END GRID -->
+            
+        </div>
+        <!-- END DARK CONTAINER -->
+        
+    </section>
+
+    <!-- ============================================ -->
+    <!-- SECTION 3: THE ELITE CONTACT FOOTER         -->
+    <!-- Premium, conversion-focused contact section -->
+    <!-- ============================================ -->
+    <footer id="contact" class="py-24 md:py-32 bg-apple-bg">
+        <div class="max-w-6xl mx-auto px-6 lg:px-8">
+            
+            <!-- Main CTA -->
+            <div class="text-center mb-20">
+                <h2 class="reveal text-4xl md:text-5xl lg:text-6xl font-bold text-apple-charcoal tracking-tight mb-6">
+                    Let's build<br>
+                    <span class="text-apple-gray">something extraordinary.</span>
+                </h2>
+                <p class="reveal reveal-delay-1 text-lg md:text-xl text-apple-gray max-w-xl mx-auto mb-10">
+                    Currently seeking hardware engineering roles in HFT, AI acceleration, and semiconductor design.
+                </p>
+                <div class="reveal reveal-delay-2">
+                    <a href="mailto:fbarr058@uottawa.ca" class="group inline-flex items-center px-8 py-4 bg-apple-charcoal text-white rounded-full font-medium text-base hover:bg-apple-charcoal/90 transition-all duration-300 shadow-lg shadow-apple-charcoal/20 hover:shadow-xl hover:shadow-apple-charcoal/25 hover:-translate-y-0.5">
+                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                        </svg>
+                        Get in Touch
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Contact Links Grid -->
+            <div class="reveal reveal-delay-3 grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 max-w-3xl mx-auto mb-20">
+                
+                <!-- Email -->
+                <div class="text-center">
+                    <span class="text-xs font-semibold text-apple-gray uppercase tracking-widest mb-3 block">Email</span>
+                    <a href="mailto:fbarr058@uottawa.ca" class="contact-link text-apple-charcoal font-medium text-base hover:text-apple-gray">
+                        fbarr058@uottawa.ca
+                    </a>
+                </div>
+                
+                <!-- LinkedIn -->
+                <div class="text-center">
+                    <span class="text-xs font-semibold text-apple-gray uppercase tracking-widest mb-3 block">LinkedIn</span>
+                    <a href="https://linkedin.com/in/francobarreto" target="_blank" rel="noopener noreferrer" class="contact-link text-apple-charcoal font-medium text-base hover:text-apple-gray">
+                        /in/francobarreto
+                    </a>
+                </div>
+                
+                <!-- GitHub -->
+                <div class="text-center">
+                    <span class="text-xs font-semibold text-apple-gray uppercase tracking-widest mb-3 block">GitHub</span>
+                    <a href="https://github.com/francobarreto" target="_blank" rel="noopener noreferrer" class="contact-link text-apple-charcoal font-medium text-base hover:text-apple-gray">
+                        @francobarreto
+                    </a>
+                </div>
+                
+            </div>
+            
+            <!-- Resume Download -->
+            <div class="reveal reveal-delay-4 text-center mb-20">
+                <a href="#" class="inline-flex items-center px-6 py-3 border-2 border-apple-charcoal text-apple-charcoal rounded-full font-medium text-sm hover:bg-apple-charcoal hover:text-white transition-all duration-300 group">
+                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                    </svg>
+                    Download Resume (PDF)
+                </a>
+            </div>
+            
+            <!-- Bottom Bar -->
+            <div class="border-t border-apple-light-gray pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
+                <p class="text-sm text-apple-gray">
+                    © 2025 Franco Barreto. Built with precision.
+                </p>
+                <div class="flex items-center gap-6">
+                    <a href="#hero" class="text-sm text-apple-gray hover:text-apple-charcoal transition-colors">Back to top</a>
+                    <span class="text-apple-light-gray">|</span>
+                    <span class="text-sm text-apple-gray">Ottawa, Canada</span>
+                </div>
+            </div>
+            
+        </div>
+    </footer>
+
+    <!-- ============================================ -->
+    <!-- JAVASCRIPT: GSAP ANIMATIONS & INTERACTIONS  -->
+    <!-- ============================================ -->
+    <script>
+        /**
+         * ================================================================
+         * ALEX CHEN PORTFOLIO - INTERACTIVE PROJECT SHOWCASE
+         * ================================================================
+         * 
+         * This script handles:
+         * 1. Scroll reveal animations for hero and footer
+         * 2. Interactive project pill buttons with expand/collapse
+         * 3. Smooth image crossfade transitions in visual stage
+         * 
+         * GSAP 3 is used for all complex animations to ensure
+         * buttery-smooth 60fps performance across all devices.
+         * 
+         * ================================================================
+         */
+        
+        // ================================================================
+        // STATE MANAGEMENT
+        // ================================================================
+        
+        /**
+         * Tracks which project is currently active/expanded.
+         * This is the single source of truth for the UI state.
+         * 
+         * Possible values:
+         * - null: No project expanded (initial state)
+         * - 'pynq-cnn': PYNQ-Z2 CNN Accelerator
+         * - 'oscilloscope': Real-Time Oscilloscope
+         * - 'pcie-dma': PCIe Gen3 DMA Controller
+         * - 'riscv-core': RISC-V Processor
+         */
+        let activeProject = null;
+        
+        /**
+         * Flag to prevent rapid clicking while animations are in progress.
+         * This prevents animation glitches from overlapping timelines.
+         */
+        let isAnimating = false;
+        
+        // ================================================================
+        // GSAP DEFAULTS
+        // ================================================================
+        
+        /**
+         * Set GSAP default easing and duration for consistency.
+         * power3.inOut provides a smooth, Apple-like acceleration curve.
+         */
+        gsap.defaults({
+            ease: "power3.inOut",
+            duration: 0.5
+        });
+        
+        // ================================================================
+        // DOM ELEMENT REFERENCES
+        // ================================================================
+        
+        /**
+         * Cache all DOM elements we'll be manipulating.
+         * This improves performance by avoiding repeated DOM queries.
+         */
+        const pillButtons = document.querySelectorAll('.pill-button');
+        const projectItems = document.querySelectorAll('.project-item');
+        const projectImages = document.querySelectorAll('.project-image');
+        const infoCards = document.querySelectorAll('.info-card');
+        
+        // ================================================================
+        // INFO CARD ANIMATION FUNCTIONS
+        // ================================================================
+        
+        /**
+         * Expands an info card with smooth GSAP animation.
+         * 
+         * The animation sequence:
+         * 1. Animate card height from 0 to auto (using GSAP's auto feature)
+         * 2. Fade in the card container
+         * 3. Fade in and slide up the inner content
+         * 4. Rotate the plus icon 45° to form an X
+         * 
+         * @param {HTMLElement} card - The .info-card element to expand
+         * @param {HTMLElement} pill - The associated .pill-button element
+         */
+        function expandCard(card, pill) {
+            // Get references to child elements
+            const content = card.querySelector('.info-card-content');
+            const icon = pill.querySelector('.pill-icon');
+            
+            // Create a GSAP timeline for sequenced animations
+            const tl = gsap.timeline({
+                defaults: {
+                    ease: "power3.inOut"
+                }
+            });
+            
+            // Step 1: Expand the card container
+            // We use 'auto' for height to let CSS determine natural height
+            tl.to(card, {
+                height: 'auto',
+                opacity: 1,
+                paddingTop: 0,
+                paddingBottom: 0,
+                duration: 0.5
+            });
+            
+            // Step 2: Fade in and slide up the content
+            // Starts slightly before card expansion completes (overlap: "-=0.3")
+            tl.to(content, {
+                opacity: 1,
+                y: 0,
+                duration: 0.4,
+                ease: "power2.out"
+            }, "-=0.3");
+            
+            // Step 3: Rotate the plus icon to form an X
+            // This is independent of the timeline, runs immediately
+            gsap.to(icon, {
+                rotation: 45,
+                duration: 0.4,
+                ease: "power2.inOut"
+            });
+            
+            // Add active state class to pill for styling
+            pill.classList.add('active');
+            pill.style.backgroundColor = '#48484A'; // dark-pill-active color
+        }
+        
+        /**
+         * Collapses an info card with smooth GSAP animation.
+         * 
+         * The animation sequence (reverse of expand):
+         * 1. Fade out and slide down the inner content
+         * 2. Collapse the card height to 0
+         * 3. Rotate the X icon back to a plus
+         * 
+         * @param {HTMLElement} card - The .info-card element to collapse
+         * @param {HTMLElement} pill - The associated .pill-button element
+         * @returns {gsap.core.Timeline} - The animation timeline (for chaining)
+         */
+        function collapseCard(card, pill) {
+            // Get references to child elements
+            const content = card.querySelector('.info-card-content');
+            const icon = pill.querySelector('.pill-icon');
+            
+            // Create a GSAP timeline for sequenced animations
+            const tl = gsap.timeline({
+                defaults: {
+                    ease: "power3.inOut"
+                }
+            });
+            
+            // Step 1: Fade out the content first
+            tl.to(content, {
+                opacity: 0,
+                y: 10,
+                duration: 0.3
+            });
+            
+            // Step 2: Collapse the card container
+            tl.to(card, {
+                height: 0,
+                opacity: 0,
+                duration: 0.4
+            }, "-=0.1");
+            
+            // Step 3: Rotate the X icon back to a plus
+            gsap.to(icon, {
+                rotation: 0,
+                duration: 0.4,
+                ease: "power2.inOut"
+            });
+            
+            // Remove active state from pill
+            pill.classList.remove('active');
+            pill.style.backgroundColor = ''; // Reset to default
+            
+            return tl;
+        }
+        
+        // ================================================================
+        // IMAGE CROSSFADE ANIMATION FUNCTION
+        // ================================================================
+        
+        /**
+         * Performs a smooth crossfade between project images.
+         * 
+         * Animation details:
+         * - Outgoing image: Fades out + scales up slightly (1.05x)
+         *   This creates a "zooming away" effect
+         * - Incoming image: Fades in + scales down from 1.05x to 1x
+         *   This creates a "focusing in" effect
+         * 
+         * @param {string} projectId - The data-project value of the new image
+         */
+        function crossfadeImages(projectId) {
+            // Find the image that should become visible
+            const incomingImage = document.querySelector(`.project-image[data-project="${projectId}"]`);
+            
+            // Find all other images (to fade out)
+            const outgoingImages = document.querySelectorAll(`.project-image:not([data-project="${projectId}"])`);
+            
+            // Create timeline for crossfade
+            const tl = gsap.timeline({
+                defaults: {
+                    ease: "power2.out",
+                    duration: 0.6
+                }
+            });
+            
+            // Fade out all non-active images
+            // Scale up slightly for a "zoom away" effect
+            outgoingImages.forEach(img => {
+                tl.to(img, {
+                    opacity: 0,
+                    scale: 1.05,
+                    duration: 0.4
+                }, 0); // All start at time 0 (parallel)
+            });
+            
+            // Fade in the new active image
+            // Scale from 1.05 to 1 for a "focus in" effect
+            tl.fromTo(incomingImage, 
+                {
+                    opacity: 0,
+                    scale: 1.05
+                },
+                {
+                    opacity: 1,
+                    scale: 1,
+                    duration: 0.6,
+                    ease: "power2.out"
+                },
+                0.15 // Slight delay for crossfade overlap
+            );
+            
+            return tl;
+        }
+        
+        // ================================================================
+        // MAIN CLICK HANDLER
+        // ================================================================
+        
+        /**
+         * Handles click events on project pill buttons.
+         * 
+         * Logic:
+         * 1. If clicking already-active project → collapse it (toggle off)
+         * 2. If clicking new project → collapse old, expand new, crossfade images
+         * 
+         * @param {Event} event - The click event
+         */
+        function handlePillClick(event) {
+            // Prevent handling if animation is in progress
+            if (isAnimating) return;
+            
+            // Get the clicked button and its project ID
+            const clickedPill = event.currentTarget;
+            const clickedProject = clickedPill.getAttribute('data-project');
+            
+            // Get the associated info card
+            const projectItem = clickedPill.closest('.project-item');
+            const infoCard = projectItem.querySelector('.info-card');
+            
+            // Lock animations
+            isAnimating = true;
+            
+            // ============================================
+            // CASE 1: Clicking the already-active project
+            // Action: Just collapse it (toggle off)
+            // ============================================
+            if (clickedProject === activeProject) {
+                // Collapse the current card
+                const collapseTl = collapseCard(infoCard, clickedPill);
+                
+                // Update state and unlock when done
+                collapseTl.eventCallback("onComplete", () => {
+                    activeProject = null;
+                    isAnimating = false;
+                });
+                
+                return;
+            }
+            
+            // ============================================
+            // CASE 2: Clicking a new project
+            // Action: Collapse old (if any), expand new, crossfade
+            // ============================================
+            
+            // Create master timeline for coordinated animations
+            const masterTl = gsap.timeline({
+                onComplete: () => {
+                    // Unlock animations when everything is done
+                    isAnimating = false;
+                }
+            });
+            
+            // If there's a currently active project, collapse it first
+            if (activeProject !== null) {
+                // Find the currently active pill and card
+                const activePill = document.querySelector(`.pill-button[data-project="${activeProject}"]`);
+                const activeItem = activePill.closest('.project-item');
+                const activeCard = activeItem.querySelector('.info-card');
+                
+                // Collapse the active card
+                collapseCard(activeCard, activePill);
+            }
+            
+            // Small delay to let collapse start, then expand new card
+            // This creates a nice staggered effect
+            setTimeout(() => {
+                expandCard(infoCard, clickedPill);
+            }, activeProject ? 200 : 0);
+            
+            // Crossfade the images
+            crossfadeImages(clickedProject);
+            
+            // Update state
+            activeProject = clickedProject;
+        }
+        
+        // ================================================================
+        // EVENT LISTENERS
+        // ================================================================
+        
+        /**
+         * Attach click handlers to all pill buttons.
+         * We use a forEach loop to attach individual handlers rather than
+         * event delegation for better performance with GSAP.
+         */
+        pillButtons.forEach(pill => {
+            pill.addEventListener('click', handlePillClick);
+        });
+        
+        // ================================================================
+        // SCROLL REVEAL OBSERVER
+        // ================================================================
+        
+        /**
+         * Uses IntersectionObserver API to trigger reveal animations
+         * when elements scroll into view. This is more performant than
+         * scroll event listeners.
+         * 
+         * Configuration:
+         * - threshold: 0.1 (trigger when 10% visible)
+         * - rootMargin: Triggers slightly before element is in view
+         */
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    // Add 'active' class to trigger CSS transition
+                    entry.target.classList.add('active');
+                    
+                    // Optional: Unobserve after revealing (one-time animation)
+                    // revealObserver.unobserve(entry.target);
+                }
+            });
+        }, {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        });
+        
+        /**
+         * Observe all elements with .reveal class
+         */
+        document.querySelectorAll('.reveal').forEach(el => {
+            revealObserver.observe(el);
+        });
+        
+        // ================================================================
+        // SMOOTH SCROLL FOR ANCHOR LINKS
+        // ================================================================
+        
+        /**
+         * Handles smooth scrolling for all internal anchor links.
+         * This provides a polished navigation experience.
+         */
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const href = this.getAttribute('href');
+                
+                // Only handle internal anchors
+                if (href !== '#') {
+                    e.preventDefault();
+                    const target = document.querySelector(href);
+                    
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                }
+            });
+        });
+        
+        // ================================================================
+        // INITIAL STATE SETUP
+        // ================================================================
+        
+        /**
+         * Set up the initial visual state on page load.
+         * The first project's image is visible by default (via inline styles),
+         * but no info card is expanded initially.
+         */
+        document.addEventListener('DOMContentLoaded', () => {
+            // Ensure all info cards start collapsed
+            infoCards.forEach(card => {
+                gsap.set(card, {
+                    height: 0,
+                    opacity: 0
+                });
+            });
+            
+            // Ensure all card contents start hidden
+            document.querySelectorAll('.info-card-content').forEach(content => {
+                gsap.set(content, {
+                    opacity: 0,
+                    y: 10
+                });
+            });
+            
+            // Set first image as visible, others hidden
+            projectImages.forEach((img, index) => {
+                if (index === 0) {
+                    gsap.set(img, { opacity: 1, scale: 1 });
+                } else {
+                    gsap.set(img, { opacity: 0, scale: 1.05 });
+                }
+            });
+            
+            console.log('✅ Portfolio initialized. GSAP animations ready.');
+        });
+        
+        // ================================================================
+        // KEYBOARD ACCESSIBILITY
+        // ================================================================
+        
+        /**
+         * Allow keyboard navigation of project pills.
+         * Enter and Space keys trigger the same action as click.
+         */
+        pillButtons.forEach(pill => {
+            pill.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    handlePillClick({ currentTarget: pill });
+                }
+            });
+        });
+        
+        // ================================================================
+        // END OF JAVASCRIPT
+        // ================================================================
+    </script>
+
+</body>
+</html>
